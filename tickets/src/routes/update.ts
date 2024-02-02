@@ -1,4 +1,8 @@
-import { NotAuthorizedError, requireAuth } from "@tickethub-dev/th-common";
+import {
+  BadRequestError,
+  NotAuthorizedError,
+  requireAuth,
+} from "@tickethub-dev/th-common";
 import express, { Request, Response } from "express";
 import { Ticket } from "../models/ticket";
 import { body } from "express-validator";
@@ -21,6 +25,10 @@ router.put(
 
     if (!ticket) {
       throw new Error("Ticket does not exist");
+    }
+
+    if (ticket.orderId) {
+      throw new BadRequestError("Cannot update reserved ticket");
     }
 
     if (ticket.userId !== req.currentUser!.id) {
