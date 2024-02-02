@@ -49,7 +49,7 @@ const start = async () => {
   }
 
   try {
-    await natsWrapper.connect("tickethub", "exampleid", "http://nats-srv:4222");
+    await natsWrapper.connect("tickethub", "bla-1234", "http://nats-srv:4222");
 
     natsWrapper.client.on("close", () => {
       console.log("NATS connection closed..");

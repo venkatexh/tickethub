@@ -61,7 +61,7 @@ ticketSchema.statics.findByEvent = (event: { id: string; version: number }) => {
 };
 
 ticketSchema.methods.isReserved = async function () {
-  const existingOrder = await Order.find({
+  const existingOrder = await Order.findOne({
     ticket: this,
     status: {
       $in: [
